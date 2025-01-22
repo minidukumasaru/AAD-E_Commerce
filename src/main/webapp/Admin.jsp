@@ -37,7 +37,7 @@
           <a class="nav-link" href="category-list">CategoryManage</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="admin-login.jsp">Login</a>
+          <a class="nav-link" href="adminLogin.jsp">Login</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="user-list">Users</a>
