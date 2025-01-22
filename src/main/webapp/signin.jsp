@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: minid
   Date: 1/22/2025
-  Time: 6:38 AM
+  Time: 6:34 AM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -11,14 +11,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
+    <title>Sign In</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #f3f3f3;
+            background-color: #ffffff;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             min-height: 100vh;
             margin: 0;
         }
@@ -50,49 +50,53 @@
         .btn-yellow:hover {
             background-color: #ddb347;
         }
+        .divider {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #ccc;
+            margin: 0 10px;
+        }
+        .footer-links {
+            font-size: 12px;
+            text-align: center;
+            margin-top: 20px;
+            color: #555;
+        }
     </style>
 </head>
 <body>
 <div class="form-container">
-    <h2 class="form-title">Create account</h2>
-    <form action="admin-register-servlet" method="post">
-        <input type="hidden" name="role" value="customer">
-        <input type="hidden" name="status" value="active">
-        <!-- Name Field -->
-        <div class="mb-3">
-            <label for="name" class="form-label">Your name</label>
-            <input type="text" class="form-control" id="name" name="user_name" placeholder="First and last name" required>
-        </div>
-
+    <h2 class="form-title">Sign in</h2>
+    <%--    <form action="index.jsp">--%>
+    <form action="new-product-list" >
         <!-- Email or Phone Field -->
         <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email" required>
-
-            <%--            <input type="text" class="form-control" id="email" placeholder="Enter your email" required>--%>
+            <label for="email" class="form-label">Email or mobile phone number</label>
+            <input type="text" class="form-control" id="email" placeholder="Enter your email or phone" required>
         </div>
 
-        <!-- Password Field -->
         <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="At least 6 characters" required>
-            <div class="form-text">Passwords must be at least 6 characters.</div>
+            <label for="email" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="password" required>
         </div>
 
-        <!-- Re-enter Password Field -->
-        <div class="mb-3">
-            <label for="repassword" class="form-label">Re-enter password</label>
-            <input type="password" class="form-control" id="repassword" placeholder="Re-enter your password" required>
-        </div>
-        <form action="index.jsp">
-            <!-- Submit Button -->
-            <button type="submit" class="btn btn-yellow w-100">register</button></form>
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-yellow w-100">Sign in</button>
     </form>
 
+    <!-- Create Account -->
     <p class="form-note">
-        Already have an account? <a href="signin.jsp">Sign in</a>
+        <strong>New to us?</strong> <a href="signup.jsp">Create your account</a>
     </p>
 </div>
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
