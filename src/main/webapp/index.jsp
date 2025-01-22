@@ -89,7 +89,7 @@
                     <a class="nav-link" href="orders.jsp">Orders</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="customerSignIn.jsp">Sign In</a>
+                    <a class="nav-link" href="signin.jsp">Sign In</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="cart.jsp">Cart</a>
