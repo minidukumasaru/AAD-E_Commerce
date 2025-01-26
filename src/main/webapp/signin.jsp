@@ -50,54 +50,38 @@
         .btn-yellow:hover {
             background-color: #ddb347;
         }
-        .divider {
-            margin: 20px 0;
+        .error-message {
+            color: red;
+            font-size: 14px;
             text-align: center;
-        }
-        .divider::before,
-        .divider::after {
-            content: "";
-            flex: 1;
-            height: 1px;
-            background: #ccc;
-            margin: 0 10px;
-        }
-        .footer-links {
-            font-size: 12px;
-            text-align: center;
-            margin-top: 20px;
-            color: #555;
         }
     </style>
 </head>
 <body>
 <div class="form-container">
-    <h2 class="form-title">Sign in</h2>
-    <%--    <form action="index.jsp">--%>
-    <form action="new-product-list" >
+    <h2 class="form-title">Sign In</h2>
+    <!-- Display error message -->
+    <c:if test="${not empty errorMessage}">
+        <p class="error-message">${errorMessage}</p>
+    </c:if>
+    <form action="checkOut.jsp" >
         <!-- Email or Phone Field -->
         <div class="mb-3">
-            <label for="email" class="form-label">Email or mobile phone number</label>
-            <input type="text" class="form-control" id="email" placeholder="Enter your email or phone" required>
+            <label for="email" class="form-label">Email</label>
+            <input type="email" name="email" class="form-control" id="email" placeholder="Enter your email" required>
         </div>
-
         <div class="mb-3">
-            <label for="email" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="password" required>
+            <label for="password" class="form-label">Password</label>
+            <input type="password" name="password" class="form-control" id="password" placeholder="Enter your password" required>
         </div>
-
         <!-- Submit Button -->
-        <button type="submit" class="btn btn-yellow w-100">Sign in</button>
+        <button type="submit" class="btn btn-yellow w-100"> Sign In</button>
     </form>
-
     <!-- Create Account -->
     <p class="form-note">
         <strong>New to us?</strong> <a href="signup.jsp">Create your account</a>
     </p>
 </div>
-
-
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
