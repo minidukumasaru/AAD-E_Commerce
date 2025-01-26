@@ -53,7 +53,7 @@
 <body>
 <div class="login-container">
     <h2 class="text-center mb-4">Login</h2>
-    <form action="admin-login" method="get">
+    <form action="Admin.jsp" method="get">
         <div class="mb-3">
             <label for="email" class="form-label">Email:</label>
             <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
@@ -65,7 +65,7 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
             <a href="forgot-password.jsp" class="forgot-password">Forgot Password?</a>
         </div>
-        <button type="submit" class="btn btn-primary w-100">Login</button>
+        <button type="submit" class="btn btn-primary w-100" >Login</button>
     </form>
     <div class="register-link mt-4">
         <p>Don't have an account? <a href="adminRegister.jsp">Register now</a></p>
