@@ -1,216 +1,153 @@
+<%@ page import="org.example.ecommerce.dto.CartItemDTO" %>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AliExpress - Cart</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <title>Landing Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        .cart-item img {
-            max-width: 100px;
-            object-fit: cover;
-        }
-
-        .cart-item {
-            margin-bottom: 15px;
-        }
-
-        .cart-item .card-body {
+        /* Hero Section Styling */
+        .hero {
+            height: 100vh;
+            background: url('https://via.placeholder.com/1920x1080') no-repeat center center fixed;
+            background-size: cover;
             display: flex;
             align-items: center;
+            justify-content: center;
+            position: relative;
+            text-align: center;
+            color: #fff;
         }
 
-        .cart-item .card-body .product-details {
-            flex-grow: 1;
+        /* Overlay for Dark Effect */
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
         }
 
-        .cart-item .card-body .product-details h5 {
-            margin-bottom: 5px;
+        /* Text and Buttons */
+        .hero-content {
+            z-index: 2;
+            max-width: 700px;
+            padding: 20px;
         }
 
-        .cart-item .card-body .product-details p {
-            margin-bottom: 10px;
-            color: #777;
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
         }
 
-        .total-section {
-            margin-top: 30px;
-            text-align: right;
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
         }
 
-        .btn-remove {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: none;
+        .btn-custom {
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease-in-out;
         }
 
-        .btn-remove:hover {
-            background-color: #f5c6cb;
+        .btn-custom-primary {
+            background-color: #0d6efd;
+            color: #fff;
         }
 
-        .navbar,
-        .footer {
-            background-color: black;
-            color: white;
+        .btn-custom-primary:hover {
+            background-color: #0056b3;
+            box-shadow: 0px 4px 10px rgba(13, 110, 253, 0.3);
         }
 
-        .navbar .nav-link,
-        .footer a {
-            color: white !important;
+        .btn-custom-outline {
+            border: 2px solid #fff;
+            color: #fff;
         }
 
-        .footer h5 {
-            color: white;
+        .btn-custom-outline:hover {
+            background-color: #fff;
+            color: #000;
+        }
+
+        /* Navbar Styling with Gradient */
+        .navbar {
+            background: linear-gradient(90deg, rgba(255, 0, 150, 0.8), rgba(0, 204, 255, 0.8));
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: #fff !important;
+        }
+
+        .navbar-nav .nav-link {
+            color: #fff !important;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #ffcc00 !important;
+            border-bottom: 2px solid #ffcc00;
+        }
+
+        .navbar-nav .nav-link.active {
+            color: #ffcc00 !important;
+            font-weight: bold;
+        }
+
+        .navbar-nav .nav-item {
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-item:hover {
+            transform: translateY(-3px);
         }
     </style>
 </head>
-
 <body>
-
-<!-- Navigation Bar -->
-<nav class="navbar navbar-expand-lg">
-    <div class="container-fluid">
-        <a class="navbar-brand text-white" href="#">AliExpress</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark py-3">
+    <div class="container">
+        <a class="navbar-brand" href="#">--Tinka Store--</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="home.jsp">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="category.jsp">Categories</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="orders.jsp">Orders</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="customerSignIn.jsp">Sign In</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="cart.jsp">Cart</a>
-                </li>
-
+                <li class="nav-item"><a class="nav-link active" href="index.jsp">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="cart.jsp">Cart</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="signin.jsp">Login</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
-<!-- Cart Items -->
-<div class="container mt-5">
-    <h2>Your Shopping Cart</h2>
-    <div class="row">
-        <!-- Cart Item 1 -->
-        <div class="col-12 cart-item">
-            <div class="card">
-                <div class="card-body">
-                    <img src="https://via.placeholder.com/100" alt="Product 1">
-                    <div class="product-details ms-3">
-                        <h5 class="card-title">Wireless Headphones</h5>
-                        <p class="card-text">High-quality sound with noise-canceling features.</p>
-                        <div class="d-flex justify-content-between">
-                            <input type="number" class="form-control w-25" value="1" min="1">
-                            <h5 class="ms-3">$35.00</h5>
-                            <button class="btn btn-remove">Remove</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Cart Item 2 -->
-        <div class="col-12 cart-item">
-            <div class="card">
-                <div class="card-body">
-                    <img src="https://via.placeholder.com/100" alt="Product 2">
-                    <div class="product-details ms-3">
-                        <h5 class="card-title">Smartphone Case</h5>
-                        <p class="card-text">Durable and stylish case for your smartphone.</p>
-                        <div class="d-flex justify-content-between">
-                            <input type="number" class="form-control w-25" value="1" min="1">
-                            <h5 class="ms-3">$15.00</h5>
-                            <button class="btn btn-remove">Remove</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Cart Item 3 -->
-        <div class="col-12 cart-item">
-            <div class="card">
-                <div class="card-body">
-                    <img src="https://via.placeholder.com/100" alt="Product 3">
-                    <div class="product-details ms-3">
-                        <h5 class="card-title">Bluetooth Speaker</h5>
-                        <p class="card-text">Portable speaker with excellent sound quality.</p>
-                        <div class="d-flex justify-content-between">
-                            <input type="number" class="form-control w-25" value="1" min="1">
-                            <h5 class="ms-3">$50.00</h5>
-                            <button class="btn btn-remove">Remove</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content text-center">
+        <h1>Welcome to Tinka Store</h1>
+        <p>Discover incredible products and exclusive deals tailored just for you!</p>
+        <div>
+            <a href="signup.jsp" class="btn btn-custom btn-custom-primary me-2">Sign Up Now</a>
+            <a href="signin.jsp" class="btn btn-custom btn-custom-outline">Sign In</a>
         </div>
     </div>
+</section>
 
-    <!-- Total Section -->
-    <div class="total-section">
-        <h4>Total: $100.00</h4>
-        <button class="btn btn-primary">Proceed to Checkout</button>
-    </div>
-</div>
-
-<!-- Footer -->
-<div class="footer mt-5 py-4">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <h5>About AliExpress</h5>
-                <ul class="list-unstyled">
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Use</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3">
-                <h5>Customer Service</h5>
-                <ul class="list-unstyled">
-                    <li><a href="#">Help Center</a></li>
-                    <li><a href="#">Returns & Refunds</a></li>
-                    <li><a href="#">Shipping Info</a></li>
-                    <li><a href="#">FAQ</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3">
-                <h5>Follow Us</h5>
-                <ul class="list-unstyled">
-                    <li><a href="#">Facebook</a></li>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">Instagram</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3">
-                <h5>Contact Us</h5>
-                <ul class="list-unstyled">
-                    <li>Email: support@aliexpress.com</li>
-                    <li>Phone: 1-800-555-6789</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Bootstrap JS and dependencies -->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>

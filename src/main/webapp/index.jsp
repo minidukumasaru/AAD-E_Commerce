@@ -1,277 +1,292 @@
+<%@ page import="org.example.ecommerce.dto.ProductDTO" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AliExpress - Bootstrap eCommerce</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <title>E-Shop</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Custom styles for product cards */
-        .product-card {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            overflow: hidden;
+        body {
+            font-family: 'Roboto', sans-serif;
         }
 
-        .product-card img {
-            max-height: 250px;
-            object-fit: cover;
-            border-bottom: 1px solid #ddd;
+        /* Navbar Styling */
+        .navbar {
+            background: linear-gradient(90deg, rgba(255, 0, 150, 0.8), rgba(0, 204, 255, 0.8));
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .product-card .card-body {
-            padding: 15px;
+        .navbar-brand {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #ffffff !important;
         }
 
-        /* Banner styles */
-        .banner {
-            width: 100%;
-            height: 400px;
-            background-size: cover;
-            background-position: center;
+        .navbar-nav .nav-link {
+            color: #ffffff !important;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: all 0.3s ease;
         }
 
-        .banner-text {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            color: white;
-            font-size: 30px;
+        .navbar-nav .nav-link:hover {
+            color: #ffcc00 !important;
+            border-bottom: 2px solid #ffcc00;
+        }
+
+        .navbar-dark .btn-danger {
             font-weight: bold;
         }
 
-        /* Navbar and Footer styles */
-        .navbar, .footer {
-            background-color: #000;
-            color: white;
+        /* Video Background */
+        .video-container {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
         }
 
-        .navbar .navbar-nav .nav-link {
-            color: white;
+        .video-container video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: -1;
         }
 
-        .navbar .navbar-nav .nav-link:hover {
-            color: #FFD700;
+        .video-caption {
+            position: absolute;
+            top: 80%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 1;
+        }
+
+        .video-caption h1 {
+            font-size: 3rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+
+        .video-caption p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .video-caption .btn-warning {
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        /* Card Styling */
+        .card {
+            position: relative;
+            background: white; /* Inner content background */
+            border-radius: 10px; /* Rounded corners */
+            padding: 10px;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            background: linear-gradient(90deg, rgba(255, 0, 150, 0.8), rgba(0, 204, 255, 0.8));
+            border-radius: 12px; /* Same as border-radius + padding */
+            padding: 3px; /* Border thickness */
+            -webkit-mask: linear-gradient(black, black) content-box, linear-gradient(black, black);
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+        }
+
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 2px solid #f1f1f1;
+        }
+
+        .card-body h5 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .card-body .btn-danger {
+            background: linear-gradient(90deg, rgba(255, 0, 150, 0.8), rgba(0, 204, 255, 0.8)); /* Gradient base */
+            border: none;
+            color: #fff;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 204, 255, 0.3); /* Soft shadow */
+            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            background-size: 200%; /* For hover effect */
+        }
+
+        .card-body .btn-danger:hover {
+            background: linear-gradient(90deg, rgba(0, 204, 255, 0.8), rgba(255, 0, 150, 0.8)); /* Reversed gradient for hover */
+            box-shadow: 0 6px 12px rgba(0, 204, 255, 0.5); /* More intense shadow */
+            transform: scale(1.05); /* Slight scaling */
+        }
+
+        .card-body .btn-danger:active {
+            background: linear-gradient(90deg, rgba(255, 0, 150, 1), rgba(0, 204, 255, 1)); /* Solid gradient for active state */
+            transform: scale(0.95); /* Shrink on click */
+            box-shadow: 0 2px 4px rgba(0, 204, 255, 0.4); /* Reduced shadow */
+        }
+
+
+
+        /* Footer Styling */
+        .footer {
+            background-color: #001f3f;
+            color: #f1f1f1;
+            padding: 30px 0;
         }
 
         .footer a {
-            color: white;
+            color: #ffcc00;
+            text-decoration: none;
         }
 
         .footer a:hover {
-            color: #FFD700;
+            text-decoration: underline;
         }
     </style>
 </head>
-
 <body>
-
-<!-- Navigation Bar -->
-<nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">AliExpress</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">--Tinka Store--</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Home</a>
+                    <a class="nav-link" href="index.jsp">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="category.jsp">Categories</a>
+                    <a class="nav-link" href="new-product-list">Categories</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="orders.jsp">Orders</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="signin.jsp">Sign In</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="cart.jsp">Cart</a>
+                    <a class="nav-link" href="signin.jsp">Login</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="Admin.jsp">Admin</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="addCart.jsp">Cart <span class="badge bg-primary">0</span></a>
+                </li>
+                <li>
+                    <a href="logout.jsp" class="btn btn-danger">Logout</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 
-<!-- Search Bar -->
-<div class="container mt-4">
-    <div class="row">
-        <div class="col-12">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for products, brands, or categories">
-                <button class="btn btn-outline-secondary" type="button">Search</button>
-            </div>
-        </div>
+<!-- Video Background -->
+<div class="video-container">
+    <video autoplay loop muted>
+        <source src="images/Ecommerce%20Advertising%20Video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="video-caption">
+        <a href="new-product-list" class="btn btn-warning">Shop Now</a>
     </div>
 </div>
 
-<!-- Banner Section -->
-<div class="container mt-4">
-    <div class="row">
-        <div class="col-12">
-            <div class="banner" style="background-image: url('https://via.placeholder.com/1920x400/FF6347/FFFFFF?text=Huge+Sale!/');">
-                <div class="banner-text">Biggest Discounts of the Season!</div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Featured Categories -->
+<!-- Products Section -->
 <div class="container mt-5">
-    <h2>Featured Categories</h2>
-    <div class="row">
-        <!-- Category 1 -->
-        <div class="col-md-3">
-            <div class="card">
-                <img src="https://via.placeholder.com/300" class="card-img-top" alt="Category 1">
-                <div class="card-body">
-                    <h5 class="card-title">Electronics</h5>
-                    <a href="#" class="btn btn-primary">Shop Now</a>
-                </div>
-            </div>
-        </div>
-        <!-- Category 2 -->
-        <div class="col-md-3">
-            <div class="card">
-                <img src="https://via.placeholder.com/300" class="card-img-top" alt="Category 2">
-                <div class="card-body">
-                    <h5 class="card-title">Fashion</h5>
-                    <a href="#" class="btn btn-primary">Shop Now</a>
-                </div>
-            </div>
-        </div>
-        <!-- Category 3 -->
-        <div class="col-md-3">
-            <div class="card">
-                <img src="https://via.placeholder.com/300" class="card-img-top" alt="Category 3">
-                <div class="card-body">
-                    <h5 class="card-title">Home & Living</h5>
-                    <a href="#" class="btn btn-primary">Shop Now</a>
-                </div>
-            </div>
-        </div>
-        <!-- Category 4 -->
-        <div class="col-md-3">
-            <div class="card">
-                <img src="https://via.placeholder.com/300" class="card-img-top" alt="Category 4">
-                <div class="card-body">
-                    <h5 class="card-title">Beauty</h5>
-                    <a href="#" class="btn btn-primary">Shop Now</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    <h1 class="text-center mb-4">Our Products</h1>
 
-<!-- Product Listing Section -->
-<div class="container mt-5">
-    <h2>Popular Products</h2>
-    <div class="row">
-        <!-- Product 1 -->
-        <div class="col-md-3">
-            <div class="card product-card">
-                <img src="https://via.placeholder.com/250" class="card-img-top" alt="Product 1">
+    <%
+        // Fetch the product list passed from the servlet
+        List<ProductDTO> productList = (List<ProductDTO>) request.getAttribute("productList");
+        if (productList != null && !productList.isEmpty()) {
+    %>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+        <%
+            for (ProductDTO product : productList) {
+        %>
+        <div class="col">
+            <div class="card h-100">
+                <!-- Product Image -->
+                <img src="<%= product.getImage_path() %>" class="card-img-top" alt="<%= product.getProductName() %>" style="height: 200px; object-fit: cover;">
+
                 <div class="card-body">
-                    <h5 class="card-title">Wireless Headphones</h5>
-                    <p class="card-text">High-quality sound with noise-canceling features.</p>
-                    <h5>$35.00</h5>
-                    <a href="#" class="btn btn-primary">Buy Now</a>
+                    <!-- Product Name -->
+                    <h5 class="card-title"><%= product.getProductName() %></h5>
+
+                    <!-- Product Description -->
+                    <p class="card-text text-muted"><%= product.getProductDescription() %></p>
+
+                    <!-- Product Price -->
+                    <p class="fw-bold">Price: $<%= product.getProductPrice() %></p>
+
+                    <!-- Product Quantity -->
+                    <p>Available: <%= product.getProductQuantity() %> units</p>
+
+                    <!-- Action Button -->
+                    <form action="cart" method="post">
+                        <input type="hidden" name="product_id" value="<%= product.getProduct_id() %>">
+                        <input type="hidden" name="product_name" value="<%= product.getProductName() %>">
+                        <input type="hidden" name="product_price" value="<%= product.getProductPrice() %>">
+                        <input type="hidden" name="product_quantity" value="1">
+                        <input type="hidden" name="product_image" value="<%= product.getImage_path() %>">
+                        <button type="submit" class="btn btn-danger">Add to Cart</button>
+                    </form>
+
                 </div>
             </div>
         </div>
-        <!-- Product 2 -->
-        <div class="col-md-3">
-            <div class="card product-card">
-                <img src="https://via.placeholder.com/250" class="card-img-top" alt="Product 2">
-                <div class="card-body">
-                    <h5 class="card-title">Smartphone Case</h5>
-                    <p class="card-text">Durable and stylish case for your smartphone.</p>
-                    <h5>$15.00</h5>
-                    <a href="#" class="btn btn-primary">Buy Now</a>
-                </div>
-            </div>
-        </div>
-        <!-- Product 3 -->
-        <div class="col-md-3">
-            <div class="card product-card">
-                <img src="https://via.placeholder.com/250" class="card-img-top" alt="Product 3">
-                <div class="card-body">
-                    <h5 class="card-title">Bluetooth Speaker</h5>
-                    <p class="card-text">Portable speaker with excellent sound quality.</p>
-                    <h5>$50.00</h5>
-                    <a href="#" class="btn btn-primary">Buy Now</a>
-                </div>
-            </div>
-        </div>
-        <!-- Product 4 -->
-        <div class="col-md-3">
-            <div class="card product-card">
-                <img src="https://via.placeholder.com/250" class="card-img-top" alt="Product 4">
-                <div class="card-body">
-                    <h5 class="card-title">Smart Watch</h5>
-                    <p class="card-text">Track your fitness goals with this stylish smartwatch.</p>
-                    <h5>$99.00</h5>
-                    <a href="#" class="btn btn-primary">Buy Now</a>
-                </div>
-            </div>
-        </div>
+        <%
+            }
+        %>
     </div>
+    <% } else { %>
+    <div class="alert alert-warning text-center" role="alert">
+        No products available at the moment.
+    </div>
+    <% } %>
 </div>
 
 <!-- Footer -->
-<div class="footer mt-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <h5>About AliExpress</h5>
-                <ul class="list-unstyled">
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Use</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3">
-                <h5>Customer Service</h5>
-                <ul class="list-unstyled">
-                    <li><a href="#">Help Center</a></li>
-                    <li><a href="#">Returns & Refunds</a></li>
-                    <li><a href="#">Shipping Info</a></li>
-                    <li><a href="#">FAQ</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3">
-                <h5>Follow Us</h5>
-                <ul class="list-unstyled">
-                    <li><a href="#">Facebook</a></li>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">Instagram</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3">
-                <h5>Contact Us</h5>
-                <ul class="list-unstyled">
-                    <li>Email: support@aliexpress.com</li>
-                    <li>Phone: 1-800-555-6789</li>
-                </ul>
-            </div>
-        </div>
+<footer class="footer">
+    <div class="container text-center">
+        <p>Follow us on:</p>
+        <a href="#"><i class="fab fa-facebook fa-lg me-3"></i></a>
+        <a href="#"><i class="fab fa-twitter fa-lg me-3"></i></a>
+        <a href="#"><i class="fab fa-instagram fa-lg me-3"></i></a>
+        <a href="#"><i class="fab fa-linkedin fa-lg"></i></a>
+        <p class="mt-3">© 2025 --Tinka Store--. All rights reserved.</p>
     </div>
-</div>
+</footer>
 
-<!-- Bootstrap JS and dependencies -->
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>

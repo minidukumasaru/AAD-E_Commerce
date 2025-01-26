@@ -35,7 +35,9 @@ public class ProductServlet extends HttpServlet {
         String productDescription = request.getParameter("productDescription");
         String productPriceStr = request.getParameter("productPrice");
         String productQuantityStr = request.getParameter("productQuantity");
-        String categoryIdStr = request.getParameter("categoryId");
+        String categoryIdStr = request.getParameter("category_id"); // Updated to match the JSP field name
+        System.out.println("Selected Category ID: " + categoryIdStr);
+        Part productImagePart = request.getPart("productImage");
 
         if (productName == null || productDescription == null || productPriceStr == null ||
                 productQuantityStr == null || categoryIdStr == null) {
@@ -57,7 +59,6 @@ public class ProductServlet extends HttpServlet {
         }
 
         // Handle file upload (product image)
-        Part productImagePart = request.getPart("productImage");
         String imagePath = null;
 
         if (productImagePart != null && productImagePart.getSize() > 0) {
